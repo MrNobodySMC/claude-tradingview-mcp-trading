@@ -1,6 +1,6 @@
 # BitGet — API Key Setup
 
-[Sign up for BitGet here](https://partner.bitget.com/bg/LewisJackson) — $1,000 bonus on your first deposit.
+[Sign up for BitGet here](https://www.bitget.com)
 
 ## What you'll get
 - API Key

@@ -33,7 +33,7 @@ For anyone who wants to understand the steps manually, or troubleshoot a specifi
 
 - **TradingView MCP** must already be set up — see [docs/setup-macos.md](docs/setup-macos.md) (Mac), [docs/setup-windows.md](docs/setup-windows.md) (Windows), or [docs/setup-linux.md](docs/setup-linux.md) (Linux)
 - **Claude Code** installed and running
-- **A BitGet account** — [sign up here]([https://partner.bitget.com/bg/LewisJackson](https://bonus.bitget.com/LewisJackson)) for a $1,000 bonus on your first deposit
+- **A BitGet account** — [sign up here](https://www.bitget.com)
 - **Node.js 18+** — check with `node --version`
 
 ---
@@ -169,7 +169,7 @@ In Railway → Settings → Cron Schedule, set how often the bot runs. Recommend
 
 The example `rules.json` uses the van de Poppe + Tone Vays BTC strategy. To build one from any trader's public videos:
 
-1. Go to [Apify](https://apify.com?fpr=3ly3yd) and search the actor store for **YouTube Transcript Scraper** — takes about 30 seconds per channel
+1. Go to [Apify](https://apify.com) and search the actor store for **YouTube Transcript Scraper** — takes about 30 seconds per channel
 2. Paste the output into `prompts/01-extract-strategy.md`
 3. Run that prompt in Claude Code — it generates a `rules.json` tailored to that trader's methodology
 

@@ -34,9 +34,9 @@ Do you want to set up Wispr Flow? Type 'yes' to open it, or 'skip' to continue w
 **If they say 'yes':**
 
 Open Wispr Flow in their browser:
-- **Mac:** `open https://wisprflow.ai/r?LEWIS16`
-- **Windows:** `start https://wisprflow.ai/r?LEWIS16`
-- **Linux:** `xdg-open https://wisprflow.ai/r?LEWIS16`
+- **Mac:** `open https://wisprflow.ai`
+- **Windows:** `start https://wisprflow.ai`
+- **Linux:** `xdg-open https://wisprflow.ai`
 
 Tell them: "I've opened Wispr Flow. Download it, install it, and come back when it's
 running. Once it's set up you can speak the rest of this setup instead of typing.
@@ -254,9 +254,9 @@ Tell them: "We're going to use Apify to pull transcripts from a YouTube trader's
 channel and extract their strategy automatically. You'll need a free Apify account."
 
 Open Apify in their browser:
-- **Mac:** `open https://apify.com?fpr=3ly3yd`
-- **Windows:** `start https://apify.com?fpr=3ly3yd`
-- **Linux:** `xdg-open https://apify.com?fpr=3ly3yd`
+- **Mac:** `open https://apify.com`
+- **Windows:** `start https://apify.com`
+- **Linux:** `xdg-open https://apify.com`
 
 Tell them: "I've opened Apify. Create your account if you don't have one, then come
 back and type 'done'."
