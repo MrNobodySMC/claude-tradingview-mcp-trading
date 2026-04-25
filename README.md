@@ -19,7 +19,7 @@ I have created an entire prompt for Claude Code to install and setup everything 
 
 ### Step 1 — Paste the one-shot prompt into Claude Code
 
-Copy the entire contents of [`prompts/02-one-shot-trade.md`](prompts/02-one-shot-trade.md) and paste it into your Claude Code terminal.
+Copy the entire contents of [`prompts/automated-one-shot.md`](prompts/automated-one-shot.md) and paste it into your Claude Code terminal.
 
 That's it. Claude acts as your onboarding agent — it clones the repo, walks you through connecting BitGet, sets your trading preferences, connects TradingView, optionally builds a strategy from a YouTube channel, deploys to Railway, and runs the bot for the first time. Every step is interactive. It pauses when it needs something from you and handles everything else automatically.
 
@@ -182,7 +182,7 @@ The example `rules.json` uses the van de Poppe + Tone Vays BTC strategy. To buil
 | `rules.json` | Your strategy — indicators, entry rules, risk rules |
 | `.env` | Your BitGet credentials (gitignored — never commits) |
 | `prompts/01-extract-strategy.md` | Build rules.json from trader transcripts |
-| `prompts/02-one-shot-trade.md` | **The one-shot prompt — paste this to trade** |
+| `prompts/automated-one-shot.md` | **The one-shot prompt — paste this to trade** |
 | `safety-check-log.json` | Auto-generated log of every trade decision |
 | `trades.csv` | Tax-ready trade record — auto-written on every execution |
 | `docs/setup-macos.md` | macOS-specific MCP setup |
