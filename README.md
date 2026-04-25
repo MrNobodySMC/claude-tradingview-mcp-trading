@@ -1,36 +1,17 @@
-# Claude + TradingView MCP — Automated Trading
+# Claude Code + Tradingview = Automated Trading and Journaling
 
-## What This Does
+## What you'll be able to do
 
-**Five things you get from this setup:**
-
-1. **Claude connected to your exchange** — reads your TradingView chart and executes trades automatically
-2. **A safety check** — every condition in your strategy/system must pass before a single trade goes through
-3. **24/7 cloud execution** — deploy to Railway and it runs on a schedule, even when your laptop is closed
-4. **Automatic tax accounting** — every trade logged to `trades.csv` with date, price, fees, and net amount, ready for your accountant
-5. **Free** — no email, no course, no upsell. Everything is in this repo.
+- Connect Claude to your TradingView chart and execute trades automatically
+- Run a safety check — every condition in your strategy must pass before a trade goes through
+- Deploy to the cloud and run 24/7 on a schedule, even when your laptop is closed
+- Log every trade automatically to `trades.csv` — date, price, fees, net amount, ready for your accountant
 
 ---
 
-## The Intallation Master-Prompt
+## A guided and automated installation
 
-> **This is the thing you paste.** Open Claude Code in this directory, paste the entire contents of [`prompts/02-one-shot-trade.md`](prompts/02-one-shot-trade.md), and Claude will do the rest.
-
-Here's what it does when you run it:
-
-| Step | What Claude does |
-|------|-----------------|
-| 1 | Reads your `rules.json` strategy |
-| 2 | Pulls live price + indicator data from TradingView |
-| 3 | Calculates MACD from raw candle data |
-| 4 | Evaluates market bias (bullish / bearish / neutral) |
-| 4b | Checks trade limits — daily cap and max trade size |
-| 5 | Runs the safety check — every entry condition checked |
-| 6 | Executes the trade via BitGet if all conditions pass |
-| 7 | Logs the trade to `trades.csv` — date, price, fees, net amount (tax-ready) |
-| 8 | Saves full decision log to `safety-check-log.json` |
-
-If anything fails the safety check, it stops and tells you exactly which condition failed and the actual values. No trade goes through unless everything lines up.
+I have created an entire prompt for Claude Code to install and setup everything for you, go here: [automated-one-shot.md](prompts/automated-one-shot.md)
 
 ---
 
