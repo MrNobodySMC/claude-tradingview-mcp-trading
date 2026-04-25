@@ -31,7 +31,7 @@ For anyone who wants to understand the steps manually, or troubleshoot a specifi
 
 ### Prerequisites
 
-- **TradingView MCP** must already be set up — see [docs/setup-linux.md](docs/setup-linux.md) (Linux) or [docs/setup-windows.md](docs/setup-windows.md) (Windows)
+- **TradingView MCP** must already be set up — see [docs/setup-macos.md](docs/setup-macos.md) (Mac), [docs/setup-windows.md](docs/setup-windows.md) (Windows), or [docs/setup-linux.md](docs/setup-linux.md) (Linux)
 - **Claude Code** installed and running
 - **A BitGet account** — [sign up here]([https://partner.bitget.com/bg/LewisJackson](https://bonus.bitget.com/LewisJackson)) for a $1,000 bonus on your first deposit
 - **Node.js 18+** — check with `node --version`
