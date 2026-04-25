@@ -9,7 +9,7 @@
 
 ---
 
-## Prerequisites
+## Requierements
 
 - **Claude Code** installed — [code.claude.com](https://code.claude.com/docs/en/overview)
 - **TradingView Desktop** installed — [tradingview.com/desktop](https://www.tradingview.com/desktop/)
