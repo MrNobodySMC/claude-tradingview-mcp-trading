@@ -13,8 +13,8 @@ Download and install from the [TradingView website](https://www.tradingview.com/
 ## 2. Clone and Install the MCP Server
 
 ```bash
-git clone https://github.com/MrNobodySMC/tradingview-mcp.git ~/tradingview-mcp
-cd ~/tradingview-mcp
+git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading ~/claude-tradingview-mcp-trading
+cd ~/claude-tradingview-mcp-trading
 npm install
 ```
 
@@ -23,7 +23,7 @@ npm install
 ## 3. Register the MCP Server with Claude Code
 
 ```bash
-claude mcp add --scope user tradingview -- node /Users/YOUR_USERNAME/tradingview-mcp/src/server.js
+claude mcp add --scope user tradingview -- node /Users/YOUR_USERNAME/claude-tradingview-mcp-trading/src/server.js
 ```
 
 Replace `YOUR_USERNAME` with your macOS username. Run `echo $USER` if unsure.

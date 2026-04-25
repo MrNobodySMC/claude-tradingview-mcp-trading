@@ -7,8 +7,8 @@ Everything in the main README applies — the only differences are how TradingVi
 ## 1. Clone and Install the MCP Server
 
 ```powershell
-git clone https://github.com/MrNobodySMC/tradingview-mcp.git $HOME\tradingview-mcp
-cd $HOME\tradingview-mcp
+git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading $HOME\claude-tradingview-mcp-trading
+cd $HOME\claude-tradingview-mcp-trading
 npm install
 ```
 
@@ -19,7 +19,7 @@ npm install
 Open a terminal and run:
 
 ```powershell
-claude mcp add --scope user tradingview -- node $HOME\tradingview-mcp\src\server.js
+claude mcp add --scope user tradingview -- node $HOME\claude-tradingview-mcp-trading\src\server.js
 ```
 
 Verify it registered:
