@@ -123,15 +123,16 @@ source ~/.bashrc
 
 **AppImage:**
 
-Tell them: "Find the full path to your AppImage:
+Tell them: "Find the full path to your AppImage, then add an alias using that exact path."
+
 ```bash
 find ~ -name '*.AppImage' 2>/dev/null | grep -i trading
 ```
-Then add the alias using that exact path:
+
 ```bash
 echo 'alias tv="/full/path/to/TradingView.AppImage --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
 source ~/.bashrc
-```"
+```
 
 ---
 
