@@ -19,7 +19,9 @@
 
 ## Setup
 
-Follow the guide for your OS:
+Copy the entire contents of [`prompts/automated-one-shot.md`](prompts/automated-one-shot.md) and paste it into your Claude Code terminal. Claude walks you through every step interactively.
+
+Or follow the manual guide for your OS:
 
 - [macOS](docs/setup-macos.md)
 - [Windows](docs/setup-windows.md)
