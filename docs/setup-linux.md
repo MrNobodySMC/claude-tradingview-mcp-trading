@@ -57,10 +57,8 @@ npm install
 Use the CLI command — do NOT edit config files manually:
 
 ```bash
-claude mcp add --scope user tradingview -- node /home/YOUR_USERNAME/claude-tradingview-mcp-trading/src/server.js
+claude mcp add --scope user tradingview -- node ~/claude-tradingview-mcp-trading/src/server.js
 ```
-
-Replace `YOUR_USERNAME` with your Linux username. Run `echo $USER` if unsure.
 
 Verify it registered:
 
@@ -89,10 +87,19 @@ source ~/.bashrc
 ```
 
 **AppImage:**
+
+First find the full path to your AppImage file:
 ```bash
-echo 'alias tv="./TradingView-*.AppImage --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
+find ~ -name "*.AppImage" 2>/dev/null | grep -i trading
+```
+
+Then add the alias using that exact path:
+```bash
+echo 'alias tv="/full/path/to/TradingView.AppImage --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+Replace `/full/path/to/TradingView.AppImage` with the path returned above.
 
 Then just type `tv` to launch TradingView correctly every time.
 
@@ -148,11 +155,6 @@ Expected result: `cdp_connected: true` — you're live.
 |---|---|
 | Forgetting `--remote-allow-origins=*` | Always include it alongside `--remote-debugging-port=9222` |
 | Using `@tradingview/mcp-server` (npm package) | That package doesn't exist — use the cloned repo above |
+| AppImage alias not working | Make sure you used the full absolute path, not `./` |
 | Editing `~/.claude/mcp.json` directly | Use `claude mcp add` instead |
 | Expecting MCP to load in the same session | Always open a new terminal after registering |
-
----
-
-## 10. Continue with the Main Setup
-
-Once `tv_health_check` passes, go back to the [main README](../README.md) and continue from the BitGet credentials step.

@@ -38,14 +38,23 @@ claude mcp list
 
 ## 4. Set Up the `tv` Alias
 
-Add a shell alias so TradingView always launches with the correct flags:
+Add a shell alias so TradingView always launches with the correct flags.
 
+> **Important:** You need BOTH `--remote-debugging-port=9222` AND `--remote-allow-origins=*`. Without the second flag the connection will be rejected with a 403 error.
+
+Not sure which shell you have? Run `echo $SHELL` first — `/bin/zsh` is default on Catalina and later, `/bin/bash` on older Macs.
+
+**zsh (default on macOS Catalina and later):**
 ```bash
 echo 'alias tv="open -a TradingView --args --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-> **Important:** You need BOTH `--remote-debugging-port=9222` AND `--remote-allow-origins=*`. Without the second flag the connection will be rejected with a 403 error.
+**bash (older Macs):**
+```bash
+echo 'alias tv="open -a TradingView --args --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bash_profile
+source ~/.bash_profile
+```
 
 Then just type `tv` to launch TradingView correctly every time.
 
@@ -103,9 +112,3 @@ Expected result: `cdp_connected: true` — you're live.
 | Using `@tradingview/mcp-server` (npm package) | That package doesn't exist — use the cloned repo above |
 | Launching TradingView by clicking the icon | Must use `tv` alias or the flags won't be applied |
 | Expecting MCP to load in the same session | Always open a new terminal after registering |
-
----
-
-## 9. Continue with the Main Setup
-
-Once `tv_health_check` passes, go back to the [main README](../README.md) and continue from the BitGet credentials step.

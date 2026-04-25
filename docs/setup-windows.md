@@ -4,7 +4,13 @@ Everything in the main README applies — the only differences are how TradingVi
 
 ---
 
-## 1. Clone and Install the MCP Server
+## 1. Install TradingView Desktop
+
+Download and install from the [TradingView website](https://www.tradingview.com/desktop/). Run the installer as normal.
+
+---
+
+## 2. Clone and Install the MCP Server
 
 ```powershell
 git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading $HOME\claude-tradingview-mcp-trading
@@ -14,7 +20,7 @@ npm install
 
 ---
 
-## 2. Register the MCP Server with Claude Code
+## 3. Register the MCP Server with Claude Code
 
 Open a terminal and run:
 
@@ -30,7 +36,7 @@ claude mcp list
 
 ---
 
-## 3. Find Your TradingView Executable
+## 4. Find Your TradingView Executable
 
 TradingView Desktop on Windows installs as an `.msix` package. The executable is NOT in `Program Files` — find it with:
 
@@ -42,7 +48,7 @@ Inside that folder, look for `TradingView.exe`.
 
 ---
 
-## 4. Launch TradingView with CDP Enabled
+## 5. Launch TradingView with CDP Enabled
 
 Close TradingView if it's running, then launch it with both required flags:
 
@@ -50,7 +56,7 @@ Close TradingView if it's running, then launch it with both required flags:
 & "C:\Users\[YourName]\AppData\Local\Packages\TradingView.TradingViewDesktop_[hash]\LocalCache\Local\TradingView\TradingView.exe" --remote-debugging-port=9222 --remote-allow-origins=*
 ```
 
-Replace the path with the one you found in Step 3.
+Replace the path with the one you found in Step 4.
 
 > **Important:** You need BOTH `--remote-debugging-port=9222` AND `--remote-allow-origins=*`. Without the second flag the connection will be rejected with a 403 error.
 
@@ -58,7 +64,7 @@ Replace the path with the one you found in Step 3.
 
 ---
 
-## 5. Verify the CDP Connection
+## 6. Verify the CDP Connection
 
 In PowerShell, confirm TradingView is listening:
 
@@ -66,11 +72,11 @@ In PowerShell, confirm TradingView is listening:
 Invoke-RestMethod http://localhost:9222/json/version
 ```
 
-Expected output includes `Browser: Chrome/...`. If you get nothing or a 403, TradingView was not launched with the correct flags — close it and rerun the command from Step 4.
+Expected output includes `Browser: Chrome/...`. If you get nothing or a 403, TradingView was not launched with the correct flags — close it and rerun the command from Step 5.
 
 ---
 
-## 6. Restart Claude Code
+## 7. Restart Claude Code
 
 MCP servers only load at startup. Open a new terminal:
 
@@ -80,7 +86,7 @@ claude
 
 ---
 
-## 7. Verify the MCP Connection
+## 8. Verify the MCP Connection
 
 In the new Claude Code session:
 
@@ -100,9 +106,3 @@ Expected result: `cdp_connected: true` — you're live.
 | Using `@tradingview/mcp-server` (npm package) | That package doesn't exist — use the cloned repo above |
 | Launching TradingView normally (not via PowerShell) | Must launch with the flags — normal launch won't open port 9222 |
 | Expecting MCP to load in the same session | Always open a new terminal after registering |
-
----
-
-## 8. Continue with the Main Setup
-
-Once `tv_health_check` passes, go back to the [main README](../README.md) and continue from the BitGet credentials step.
