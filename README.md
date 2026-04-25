@@ -21,7 +21,7 @@ I have created an entire prompt for Claude Code to install and setup everything 
 
 Copy the entire contents of [`prompts/02-one-shot-trade.md`](prompts/02-one-shot-trade.md) and paste it into your Claude Code terminal.
 
-That's it. Claude acts as your onboarding agent — it clones the repo, walks you through connecting your exchange, sets your trading preferences, connects TradingView, optionally builds a strategy from a YouTube channel, deploys to Railway, and runs the bot for the first time. Every step is interactive. It pauses when it needs something from you and handles everything else automatically.
+That's it. Claude acts as your onboarding agent — it clones the repo, walks you through connecting BitGet, sets your trading preferences, connects TradingView, optionally builds a strategy from a YouTube channel, deploys to Railway, and runs the bot for the first time. Every step is interactive. It pauses when it needs something from you and handles everything else automatically.
 
 ---
 
@@ -31,9 +31,9 @@ For anyone who wants to understand the steps manually, or troubleshoot a specifi
 
 ### Prerequisites
 
-- **TradingView MCP** must already be set up — see [docs/setup-macos.md](docs/setup-macos.md) (Mac), [docs/setup-windows.md](docs/setup-windows.md) (Windows), [docs/setup-linux.md](docs/setup-linux.md) (Linux)
+- **TradingView MCP** must already be set up — see [docs/setup-linux.md](docs/setup-linux.md) (Linux) or [docs/setup-windows.md](docs/setup-windows.md) (Windows)
 - **Claude Code** installed and running
-- **A Tradovate account** — live funded account required for API access
+- **A BitGet account** — [sign up here]([https://partner.bitget.com/bg/LewisJackson](https://bonus.bitget.com/LewisJackson)) for a $1,000 bonus on your first deposit
 - **Node.js 18+** — check with `node --version`
 
 ---
@@ -54,7 +54,7 @@ cd claude-tradingview-mcp-trading
 
 ---
 
-### Add your exchange credentials
+### Add your BitGet API credentials
 
 **Mac / Linux:**
 ```bash
@@ -66,16 +66,35 @@ cp .env.example .env
 Copy-Item .env.example .env
 ```
 
-**Tradovate:**
+Open `.env` and fill in:
+
 ```
-TRADOVATE_USERNAME=your_username
-TRADOVATE_PASSWORD=your_password
+BITGET_API_KEY=your_api_key_here
+BITGET_SECRET_KEY=your_secret_key_here
+BITGET_PASSPHRASE=your_passphrase_here
 PORTFOLIO_VALUE_USD=1000
 MAX_TRADE_SIZE_USD=100
 MAX_TRADES_PER_DAY=3
 ```
 
-For other supported exchanges, see the guides in [docs/exchanges/](docs/exchanges/).
+**Getting your API key:**
+
+Step-by-step guides for all supported exchanges:
+
+| Exchange | Guide |
+|----------|-------|
+| BitGet *(used in the video)* | [docs/exchanges/bitget.md](docs/exchanges/bitget.md) |
+| Binance | [docs/exchanges/binance.md](docs/exchanges/binance.md) |
+| Bybit | [docs/exchanges/bybit.md](docs/exchanges/bybit.md) |
+| OKX | [docs/exchanges/okx.md](docs/exchanges/okx.md) |
+| Coinbase Advanced | [docs/exchanges/coinbase.md](docs/exchanges/coinbase.md) |
+| Kraken | [docs/exchanges/kraken.md](docs/exchanges/kraken.md) |
+| KuCoin | [docs/exchanges/kucoin.md](docs/exchanges/kucoin.md) |
+| Gate.io | [docs/exchanges/gateio.md](docs/exchanges/gateio.md) |
+| MEXC | [docs/exchanges/mexc.md](docs/exchanges/mexc.md) |
+| Bitfinex | [docs/exchanges/bitfinex.md](docs/exchanges/bitfinex.md) |
+
+Two rules that apply to every exchange — **withdrawals OFF, IP whitelist ON**.
 
 ---
 
@@ -120,11 +139,13 @@ Go to your Railway project → Variables and add everything from `.env.example`:
 
 | Variable | Example |
 |----------|---------|
-| `TRADOVATE_USERNAME` | your username |
-| `TRADOVATE_PASSWORD` | your password |
+| `BITGET_API_KEY` | your key |
+| `BITGET_SECRET_KEY` | your secret |
+| `BITGET_PASSPHRASE` | your passphrase |
 | `PORTFOLIO_VALUE_USD` | 1000 |
 | `MAX_TRADE_SIZE_USD` | 100 |
 | `MAX_TRADES_PER_DAY` | 3 |
+| `PAPER_TRADING` | true (set to false when ready) |
 | `SYMBOL` | BTCUSDT |
 | `TIMEFRAME` | 4H |
 
@@ -159,9 +180,9 @@ The example `rules.json` uses the van de Poppe + Tone Vays BTC strategy. To buil
 | File | What it does |
 |------|-------------|
 | `rules.json` | Your strategy — indicators, entry rules, risk rules |
-| `.env` | Your exchange credentials (gitignored — never commits) |
+| `.env` | Your BitGet credentials (gitignored — never commits) |
 | `prompts/01-extract-strategy.md` | Build rules.json from trader transcripts |
-| `prompts/automated-one-shot.md` | **The automated prompt — paste this to get started** |
+| `prompts/02-one-shot-trade.md` | **The one-shot prompt — paste this to trade** |
 | `safety-check-log.json` | Auto-generated log of every trade decision |
 | `trades.csv` | Tax-ready trade record — auto-written on every execution |
 | `docs/setup-macos.md` | macOS-specific MCP setup |
@@ -178,7 +199,7 @@ Every trade the bot places is automatically written to `trades.csv` with the col
 |--------|-------------|
 | Date | ISO date of the trade |
 | Time | UTC time |
-| Exchange | Your exchange |
+| Exchange | BitGet |
 | Symbol | e.g. BTCUSDT |
 | Side | Buy / Sell |
 | Quantity | Units traded |
@@ -221,5 +242,5 @@ Additional guardrails that apply regardless of strategy:
 ## Resources
 
 - [TradingView MCP server repo](https://github.com/LewisWJackson/tradingview-mcp-jackson)
-- [Tradovate API docs](https://api.tradovate.com)
 - [Apify](https://apify.com) — search actor store for "YouTube Transcript Scraper"
+- [BitGet](https://www.bitget.com) — create your account and generate API keys
