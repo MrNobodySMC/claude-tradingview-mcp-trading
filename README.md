@@ -4,15 +4,15 @@
 
 **Five things you get from this setup:**
 
-1. **Claude connected to your exchange** — reads your TradingView chart and executes trades on BitGet automatically
-2. **A safety check** — every condition in your strategy must pass before a single trade goes through
+1. **Claude connected to your exchange** — reads your TradingView chart and executes trades automatically
+2. **A safety check** — every condition in your strategy/system must pass before a single trade goes through
 3. **24/7 cloud execution** — deploy to Railway and it runs on a schedule, even when your laptop is closed
 4. **Automatic tax accounting** — every trade logged to `trades.csv` with date, price, fees, and net amount, ready for your accountant
 5. **Free** — no email, no course, no upsell. Everything is in this repo.
 
 ---
 
-## The One-Shot Prompt
+## The Intallation Master-Prompt
 
 > **This is the thing you paste.** Open Claude Code in this directory, paste the entire contents of [`prompts/02-one-shot-trade.md`](prompts/02-one-shot-trade.md), and Claude will do the rest.
 
