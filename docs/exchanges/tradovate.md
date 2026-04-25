@@ -16,7 +16,7 @@ Tradovate is a futures trading platform. It uses username/password authenticatio
 Send a POST request with your credentials:
 
 ```bash
-curl -X POST https://demo.tradovateapi.com/v1/auth/accesstokenrequest \
+curl -X POST https://live.tradovateapi.com/v1/auth/accesstokenrequest \
      -H "Content-Type: application/json" \
      -H "Accept: application/json" \
      -d '{
@@ -49,12 +49,13 @@ curl -X POST https://demo.tradovateapi.com/v1/auth/accesstokenrequest \
 
 ---
 
-## Endpoints
+## Endpoint
 
 | Mode | URL |
 |------|-----|
-| Demo (paper trading) | `https://demo.tradovateapi.com/v1/auth/accesstokenrequest` |
-| Live (real money) | `https://live.tradovateapi.com/v1/auth/accesstokenrequest` |
+| Live | `https://live.tradovateapi.com/v1/auth/accesstokenrequest` |
+
+> **Note:** Tradovate API access requires a live funded account. Demo accounts do not have API access.
 
 ---
 
@@ -63,15 +64,11 @@ curl -X POST https://demo.tradovateapi.com/v1/auth/accesstokenrequest \
 ```
 TRADOVATE_USERNAME=your_username
 TRADOVATE_PASSWORD=your_password
-TRADOVATE_ENV=demo
 ```
-
-Change `TRADOVATE_ENV` to `live` when you're ready to trade real money.
 
 ---
 
 ## Safety Rules
 
-- Start on `demo` — verify your strategy works before going live
 - Never share your password
 - Tradovate does not have withdrawal permissions tied to API access — your funds are protected by your account login

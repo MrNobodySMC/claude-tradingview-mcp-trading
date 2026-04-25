@@ -98,7 +98,7 @@ Here's exactly how the authentication works:
 
 **Request:**
 ```bash
-curl -X POST https://demo.tradovateapi.com/v1/auth/accesstokenrequest \
+curl -X POST https://live.tradovateapi.com/v1/auth/accesstokenrequest \
      -H "Content-Type: application/json" \
      -H "Accept: application/json" \
      -d '{
@@ -129,8 +129,8 @@ Two tokens come back — `accessToken` for placing trades, `mdAccessToken` for r
 
 You'll need:
 - Your Tradovate **username** and **password**
-- Demo (paper trading): `https://demo.tradovateapi.com/v1/auth/accesstokenrequest`
-- Live (real money): `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
+- API access requires a **live funded account** — Tradovate does not provide API access on demo accounts
+- Live endpoint: `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
 
 Type 'ready' when you have your Tradovate username and password."
 
@@ -145,9 +145,8 @@ Tell them: "Add these lines to your .env file:
 ```
 TRADOVATE_USERNAME=your_username
 TRADOVATE_PASSWORD=your_password
-TRADOVATE_ENV=demo
 ```
-We're starting on `demo` — paper trading. When you're ready to go live, change `TRADOVATE_ENV` to `live`. Save the file and type 'done'."
+Save the file and type 'done'."
 
 **[PAUSE]**
 
