@@ -53,7 +53,7 @@ Type 'done' when you're ready."
 Run the following commands:
 
 ```bash
-git clone https://github.com/jackson-video-resources/claude-tradingview-mcp-trading
+git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading
 cd claude-tradingview-mcp-trading
 ```
 
@@ -70,23 +70,86 @@ exchange automatically. Let's go."
 
 Ask the user:
 
-"Which exchange are you going to use? Lewis uses BitGet in the video — if you want
-to use the same one, type 'bitget'. Otherwise pick from the list below:
+"Which exchange are you going to use? Pick from the list below:
 
-1. BitGet *(Lewis uses this — $1,000 bonus link in description)*
-2. Binance
-3. Bybit
-4. OKX
-5. Coinbase Advanced
-6. Kraken
-7. KuCoin
-8. Gate.io
-9. MEXC
-10. Bitfinex
+1. Tradovate *(futures trading platform)*
+2. BitGet
+3. Binance
+4. Bybit
+5. OKX
+6. Coinbase Advanced
+7. Kraken
+8. KuCoin
+9. Gate.io
+10. MEXC
+11. Bitfinex
 
 Type the name or number of your exchange."
 
 **[PAUSE — wait for their answer]**
+
+---
+
+### If they choose Tradovate:
+
+Tell them: "Tradovate is a futures trading platform. Unlike crypto exchanges, it uses your username and password to get a session token — no API key to generate.
+
+Here's exactly how the authentication works:
+
+**Request:**
+```bash
+curl -X POST https://demo.tradovateapi.com/v1/auth/accesstokenrequest \
+     -H "Content-Type: application/json" \
+     -H "Accept: application/json" \
+     -d '{
+          "name": "your username",
+          "password": "your password",
+          "appId": "Sample App",
+          "appVersion": "1.0",
+          "cid": 8,
+          "deviceId": "123e4567-e89b-12d3-a456-426614174000",
+          "sec": "f03741b6-f634-48d6-9308-c8fb871150c2"
+         }'
+```
+
+**What comes back:**
+```json
+{
+    "accessToken": "your trading token",
+    "mdAccessToken": "your market data token",
+    "expirationTime": "2021-06-15T15:40:30.056Z",
+    "userStatus": "Active",
+    "hasLive": true,
+    "hasFunded": true,
+    "hasMarketData": true
+}
+```
+
+Two tokens come back — `accessToken` for placing trades, `mdAccessToken` for reading market data. The bot handles token refresh automatically.
+
+You'll need:
+- Your Tradovate **username** and **password**
+- Demo (paper trading): `https://demo.tradovateapi.com/v1/auth/accesstokenrequest`
+- Live (real money): `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
+
+Type 'ready' when you have your Tradovate username and password."
+
+**[PAUSE]**
+
+Now open .env and add your Tradovate credentials:
+- **Mac:** `open -e .env`
+- **Windows:** `notepad .env`
+- **Linux:** `nano .env`
+
+Tell them: "Add these lines to your .env file:
+```
+TRADOVATE_USERNAME=your_username
+TRADOVATE_PASSWORD=your_password
+TRADOVATE_ENV=demo
+```
+We're starting on `demo` — paper trading. When you're ready to go live, change `TRADOVATE_ENV` to `live`. Save the file and type 'done'."
+
+**[PAUSE]**
 
 ---
 
@@ -134,6 +197,7 @@ Type 'ready' when you have your API Key, Secret Key, and Passphrase."
 Look up the correct guide from the docs folder and display the full step-by-step
 instructions for their chosen exchange. The guides are at:
 
+- `docs/exchanges/tradovate.md`
 - `docs/exchanges/binance.md`
 - `docs/exchanges/bybit.md`
 - `docs/exchanges/okx.md`
@@ -215,8 +279,8 @@ If you already have it set up, run `tv_health_check` in Claude Code.
 If it returns `cdp_connected: true` — you're good. Type 'connected' to continue.
 
 **Windows or Linux?** Setup is slightly different. Instructions are in the GitHub:
-- Windows: https://github.com/jackson-video-resources/claude-tradingview-mcp-trading/blob/main/docs/setup-windows.md
-- Linux: https://github.com/jackson-video-resources/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md"
+- Windows: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-windows.md
+- Linux: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md"
 
 **[PAUSE — wait for the user to confirm TradingView is connected]**
 
