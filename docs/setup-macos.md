@@ -13,7 +13,7 @@ Download and install from the [TradingView website](https://www.tradingview.com/
 ## 2. Clone and Install the MCP Server
 
 ```bash
-git clone https://github.com/LewisWJackson/tradingview-mcp-jackson.git ~/tradingview-mcp-jackson
+git clone https://github.com/MrNobodySMC/tradingview-mcp-jackson.git ~/tradingview-mcp-jackson
 cd ~/tradingview-mcp-jackson
 npm install
 ```

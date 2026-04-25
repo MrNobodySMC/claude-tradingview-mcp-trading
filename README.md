@@ -241,6 +241,6 @@ Additional guardrails that apply regardless of strategy:
 
 ## Resources
 
-- [TradingView MCP server repo](https://github.com/LewisWJackson/tradingview-mcp-jackson)
+- [TradingView MCP server repo](https://github.com/MrNobodySMC/tradingview-mcp-jackson)
 - [Apify](https://apify.com) — search actor store for "YouTube Transcript Scraper"
 - [BitGet](https://www.bitget.com) — create your account and generate API keys
