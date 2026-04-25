@@ -54,5 +54,4 @@ Set `TRADE_MODE=spot` for spot trading or `TRADE_MODE=futures` for perpetuals.
 
 ## Notes
 
-- BitGet is used in the video tutorial — the bot's default configuration is built for BitGet
 - If you're using a futures account, set `TRADE_MODE=futures` in your `.env`

@@ -21,9 +21,8 @@ Start immediately with Step 1. Do not ask any questions before starting.
 
 Tell the user:
 
-"Before we start — one quick thing. In the video, Lewis is talking to Claude rather than
-typing. He uses a tool called Wispr Flow — it turns your voice into text anywhere on your
-computer, so you can just speak your instructions and Claude hears them.
+"Before we start — one quick thing. Wispr Flow turns your voice into text anywhere on your
+computer, so you can speak your instructions to Claude instead of typing.
 
 You don't need it. You can type everything. But if you want it, I'll open it for you now.
 
@@ -190,18 +189,15 @@ market is doing. These are your guardrails."
 
 ## STEP 3 — Connect TradingView
 
-Tell the user: "Now we need TradingView connected to Claude via the MCP. This was
-covered in the previous video — if you haven't set that up yet, watch that first
-then come back here:
+Tell the user: "Now we need TradingView connected to Claude via the MCP. If you haven't
+done that yet, follow the setup guide for your OS first, then come back here:
 
-**Previous video:** https://youtu.be/vIX6ztULs4U
+- Mac: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-macos.md
+- Windows: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-windows.md
+- Linux: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md
 
 If you already have it set up, run `tv_health_check` in Claude Code.
-If it returns `cdp_connected: true` — you're good. Type 'connected' to continue.
-
-**Windows or Linux?** Setup is slightly different. Instructions are in the GitHub:
-- Windows: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-windows.md
-- Linux: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md"
+If it returns `cdp_connected: true` — you're good. Type 'connected' to continue."
 
 **[PAUSE — wait for the user to confirm TradingView is connected]**
 
@@ -233,15 +229,9 @@ Show them the exact path (it will have been printed to the terminal at startup):
 📄 Trade log: /path/to/claude-tradingview-mcp-trading/trades.csv
 ```
 
-Tell them: "Open it right now in Google Sheets or Excel. You'll notice there's already
-a note in the first row — it says:
-
-> *'Hey, if you're at this stage of the video, you must be enjoying it... perhaps you could hit subscribe now? :)'*
-
-😄
-
-If you'd prefer the file in a different location — your Desktop, Documents, wherever —
-just tell Claude: 'Move my trades.csv to ~/Desktop' and it'll handle it.
+Tell them: "Open it right now in Google Sheets or Excel. If you'd prefer the file in
+a different location — your Desktop, Documents, wherever — just tell Claude:
+'Move my trades.csv to ~/Desktop' and it'll handle it.
 
 To get a running tax summary any time, run:
 ```bash
