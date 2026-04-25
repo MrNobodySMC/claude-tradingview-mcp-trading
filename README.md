@@ -58,6 +58,14 @@ Two rules that apply to every exchange — **withdrawals OFF, IP whitelist ON**.
 
 ---
 
+## Trading Journal
+
+Connect Claude to your Notion workspace so it can log trades, notes, and observations directly to your journal.
+
+In Claude Code, go to **Settings → Connectors** and connect your Notion account. Once connected, Claude can read and write to any page or database in your workspace — use it to log every trade with context, not just the numbers.
+
+---
+
 ## Resources
 
 how to get tradovate api access: https://youtu.be/P6cJF6Q2Y24?si=kmwJCInoiZ3Q2JXI
