@@ -189,9 +189,11 @@ Ask the user:
 
 Read the corresponding exchange guide from `docs/exchanges/` to understand that exchange's authentication method and API endpoints.
 
-Then do all of the following:
+---
 
-**1. Create the .env file:**
+## STEP 4a — Set up your API credentials
+
+Create the .env file:
 
 ```bash
 cp .env.example .env
@@ -202,17 +204,19 @@ Open it for editing:
 - Windows: `notepad .env`
 - Linux: `nano .env`
 
-Tell them: "Fill in your API credentials for [exchange name]. Come back and type 'done' when saved."
+Tell them: "Fill in your API credentials for [exchange name]. If your exchange doesn't use a passphrase, leave that field blank. Come back and type 'done' when saved."
 
 **[PAUSE]**
 
-**2. Rewrite bot.js for their exchange:**
+---
+
+## STEP 4b — Rewrite bot.js for their exchange
 
 Open `bot.js` and make these changes:
 
 - Replace the `required` credentials array (currently checking for BitGet keys) with the correct credential keys for their exchange
 - Replace the `CONFIG.bitget` block with a `CONFIG.[exchange]` block using their exchange's environment variable names
-- Rename `signBitGet()` to `sign[Exchange]()` and rewrite the signing logic using that exchange's authentication method (HMAC-SHA256, token-based, etc.) as described in the exchange doc
+- Rename `signBitGet()` to `sign[Exchange]()` and rewrite the signing logic using that exchange's authentication method as described in the exchange doc
 - Rename `placeBitGetOrder()` to `place[Exchange]Order()` and rewrite the API endpoint, headers, and request body to match that exchange's order placement API
 - Update all references to `CONFIG.bitget`, `signBitGet`, and `placeBitGetOrder` throughout the file to use the new names
 
