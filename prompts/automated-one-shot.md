@@ -35,75 +35,13 @@ exchange automatically. Let's go."
 
 ---
 
-## STEP 2 — Choose your exchange and get your API key or skip and setup later
+## STEP 2 — Choose your exchange and get your API key
 
 Ask the user:
 
-"Which exchange are you going to use? Type the name of your exchange or setup later."
+"Which exchange are you going to use? Type the name of your exchange or 'skip' to set up later."
 
 **[PAUSE — wait for their answer]**
-
----
-
-### If they choose Tradovate:
-
-Tell them: "Tradovate is a futures trading platform. Unlike crypto exchanges, it uses your username and password to get a session token — no API key to generate.
-
-Here's exactly how the authentication works:
-
-**Request:**
-```bash
-curl -X POST https://live.tradovateapi.com/v1/auth/accesstokenrequest \
-     -H "Content-Type: application/json" \
-     -H "Accept: application/json" \
-     -d '{
-          "name": "your username",
-          "password": "your password",
-          "appId": "Sample App",
-          "appVersion": "1.0",
-          "cid": 8,
-          "deviceId": "123e4567-e89b-12d3-a456-426614174000",
-          "sec": "f03741b6-f634-48d6-9308-c8fb871150c2"
-         }'
-```
-
-**What comes back:**
-```json
-{
-    "accessToken": "your trading token",
-    "mdAccessToken": "your market data token",
-    "expirationTime": "2021-06-15T15:40:30.056Z",
-    "userStatus": "Active",
-    "hasLive": true,
-    "hasFunded": true,
-    "hasMarketData": true
-}
-```
-
-Two tokens come back — `accessToken` for placing trades, `mdAccessToken` for reading market data. The bot handles token refresh automatically.
-
-You'll need:
-- Your Tradovate **username** and **password**
-- API access requires a **live funded account** — Tradovate does not provide API access on demo accounts
-- Live endpoint: `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
-
-Type 'ready' when you have your Tradovate username and password."
-
-**[PAUSE]**
-
-Now open .env and add your Tradovate credentials:
-- **Mac:** `open -e .env`
-- **Windows:** `notepad .env`
-- **Linux:** `nano .env`
-
-Tell them: "Add these lines to your .env file:
-```
-TRADOVATE_USERNAME=your_username
-TRADOVATE_PASSWORD=your_password
-```
-Save the file and type 'done'."
-
-**[PAUSE]**
 
 ---
 
@@ -250,7 +188,78 @@ Walk them through the output:
 Remind them: "Every condition you just saw checked — those came from your
 rules.json. This is your strategy running, not a generic bot."
 
-Tell them: "This is exactly what will run on your schedule in the cloud.
-Every decision is logged to safety-check-log.json — that's your full audit trail.
+Tell them: "Every decision is logged to safety-check-log.json — that's your full audit trail."
 
-You're done. Your bot is live."
+---
+
+## STEP 7 — Tradovate API setup
+
+Ask the user: "Are you using Tradovate as your exchange? Type 'yes' or 'skip'."
+
+**[PAUSE — wait for their answer]**
+
+**If they say 'yes':**
+
+Tell them: "Tradovate is a futures trading platform. Unlike crypto exchanges, it uses your username and password to get a session token — no API key to generate.
+
+Here's exactly how the authentication works:
+
+**Request:**
+```bash
+curl -X POST https://live.tradovateapi.com/v1/auth/accesstokenrequest \
+     -H "Content-Type: application/json" \
+     -H "Accept: application/json" \
+     -d '{
+          "name": "your username",
+          "password": "your password",
+          "appId": "Sample App",
+          "appVersion": "1.0",
+          "cid": 8,
+          "deviceId": "123e4567-e89b-12d3-a456-426614174000",
+          "sec": "f03741b6-f634-48d6-9308-c8fb871150c2"
+         }'
+```
+
+**What comes back:**
+```json
+{
+    "accessToken": "your trading token",
+    "mdAccessToken": "your market data token",
+    "expirationTime": "2021-06-15T15:40:30.056Z",
+    "userStatus": "Active",
+    "hasLive": true,
+    "hasFunded": true,
+    "hasMarketData": true
+}
+```
+
+Two tokens come back — `accessToken` for placing trades, `mdAccessToken` for reading market data. The bot handles token refresh automatically.
+
+You'll need:
+- Your Tradovate **username** and **password**
+- API access requires a **live funded account** — Tradovate does not provide API access on demo accounts
+- Live endpoint: `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
+
+Type 'ready' when you have your Tradovate username and password."
+
+**[PAUSE]**
+
+Now open .env and add your Tradovate credentials:
+- **Mac:** `open -e .env`
+- **Windows:** `notepad .env`
+- **Linux:** `nano .env`
+
+Tell them: "Add these lines to your .env file:
+```
+TRADOVATE_USERNAME=your_username
+TRADOVATE_PASSWORD=your_password
+```
+Save the file and type 'done'."
+
+**[PAUSE]**
+
+Tell them: "You're done. Your bot is live."
+
+**If they say 'skip':**
+
+Tell them: "You're done. Your bot is live."
