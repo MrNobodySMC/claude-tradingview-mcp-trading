@@ -45,8 +45,8 @@ find ~/Desktop /opt -name "*.AppImage" 2>/dev/null | grep -i trading
 ## 3. Clone and Install the MCP Server
 
 ```bash
-git clone https://github.com/MrNobodySMC/tradingview-mcp-jackson.git ~/tradingview-mcp-jackson
-cd ~/tradingview-mcp-jackson
+git clone https://github.com/MrNobodySMC/tradingview-mcp.git ~/tradingview-mcp
+cd ~/tradingview-mcp
 npm install
 ```
 
@@ -57,7 +57,7 @@ npm install
 Use the CLI command — do NOT edit config files manually:
 
 ```bash
-claude mcp add --scope user tradingview -- node /home/YOUR_USERNAME/tradingview-mcp-jackson/src/server.js
+claude mcp add --scope user tradingview -- node /home/YOUR_USERNAME/tradingview-mcp/src/server.js
 ```
 
 Replace `YOUR_USERNAME` with your Linux username. Run `echo $USER` if unsure.
