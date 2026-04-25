@@ -214,26 +214,18 @@ If it fails, help them troubleshoot before continuing.
 
 Ask the user:
 
-"Now for your strategy. You've got three options:
+"Now for your strategy. You've got two options:
 
-1. **Use the demo strategy** — it's already in rules.json and ready to go. VWAP + RSI(3) + EMA(8) scalping on the 1-minute chart. Good for getting started.
-2. **I already have my own strategy** — tell me what it is and I'll build your rules.json around it.
-3. **Scrape a strategy from a YouTube trader** — pick any trader whose videos you watch. I'll pull their transcripts and extract their strategy automatically using Apify.
+1. **I already have my own strategy** — tell me what it is and I'll build your rules.json around it.
+2. **Scrape a strategy from a YouTube trader** — pick any trader whose videos you watch. I'll pull their transcripts and extract their strategy automatically using Apify.
 
-Type 1, 2, or 3."
+Type 1 or 2."
 
 **[PAUSE — wait for their answer]**
 
 ---
 
-**If they choose 1 (demo strategy):**
-
-Tell them: "The demo strategy is already loaded in rules.json — nothing to do here.
-Move to Step 5."
-
----
-
-**If they choose 2 (their own strategy):**
+**If they choose 1 (their own strategy):**
 
 Ask: "Describe your strategy — the indicators you use, the conditions for a buy, the
 conditions for a sell, and any risk rules (stop loss %, max risk per trade, etc.)."
@@ -248,7 +240,7 @@ check will use."
 
 ---
 
-**If they choose 3 (scrape from YouTube):**
+**If they choose 2 (scrape from YouTube):**
 
 Tell them: "We're going to use Apify to pull transcripts from a YouTube trader's
 channel and extract their strategy automatically. You'll need a free Apify account."
