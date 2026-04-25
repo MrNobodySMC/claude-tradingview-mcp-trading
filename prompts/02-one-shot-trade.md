@@ -70,21 +70,7 @@ exchange automatically. Let's go."
 
 Ask the user:
 
-"Which exchange are you going to use? Pick from the list below:
-
-1. Tradovate *(futures trading platform)*
-2. BitGet
-3. Binance
-4. Bybit
-5. OKX
-6. Coinbase Advanced
-7. Kraken
-8. KuCoin
-9. Gate.io
-10. MEXC
-11. Bitfinex
-
-Type the name or number of your exchange."
+"Which exchange are you going to use? Type the name of your exchange."
 
 **[PAUSE — wait for their answer]**
 
@@ -147,70 +133,6 @@ TRADOVATE_USERNAME=your_username
 TRADOVATE_PASSWORD=your_password
 ```
 Save the file and type 'done'."
-
-**[PAUSE]**
-
----
-
-### If they choose BitGet:
-
-Tell them: "Great — same as Lewis. If you don't have a BitGet account yet, sign up
-here for a $1,000 bonus on your first deposit:"
-
-Open the BitGet referral link in their default browser:
-- **Mac:** `open https://partner.bitget.com/bg/LewisJackson`
-- **Windows:** `start https://partner.bitget.com/bg/LewisJackson`
-- **Linux:** `xdg-open https://partner.bitget.com/bg/LewisJackson`
-
-"I've opened BitGet for you. Create your account if you haven't already, then
-come back and type 'done'."
-
-**[PAUSE — wait for the user to type 'done' before continuing]**
-
-Now walk them through creating their API key on mobile:
-
-"Now let's get your API key. Here's the exact process — follow along:
-
-1. Open the BitGet app
-2. Tap the **Home** button at the bottom left
-3. Tap your **profile picture** at the top left
-4. Scroll all the way down and tap **More Services**
-5. Along the top menu, find and tap **Tools**
-6. Tap **API Keys**
-7. Tap **Create API Key** → **Automatically Generated API Keys**
-8. Give it a name — call it something like 'Trader Thing'
-9. Set a **Passphrase** — this is personal to you, write it down now. You can't recover it later.
-10. **Bind IP Address** — optional, skip it if you're not sure
-11. For permissions, select: **Spot Trading** + anything else you want. Leave **Crypto Loans, P2P, Transfer, and Withdrawals OFF** — never turn withdrawals on.
-12. Tap **Confirm** and complete the verification (email or 2FA)
-13. Your **API Key** and **Secret Key** will appear on screen — copy them both now
-
-Type 'ready' when you have your API Key, Secret Key, and Passphrase."
-
-**[PAUSE]**
-
----
-
-### If they choose any other exchange:
-
-Look up the correct guide from the docs folder and display the full step-by-step
-instructions for their chosen exchange. The guides are at:
-
-- `docs/exchanges/tradovate.md`
-- `docs/exchanges/binance.md`
-- `docs/exchanges/bybit.md`
-- `docs/exchanges/okx.md`
-- `docs/exchanges/coinbase.md`
-- `docs/exchanges/kraken.md`
-- `docs/exchanges/kucoin.md`
-- `docs/exchanges/gateio.md`
-- `docs/exchanges/mexc.md`
-- `docs/exchanges/bitfinex.md`
-
-Read the relevant file and walk them through it step by step. Tell them what
-credentials they'll end up with (some exchanges don't use a passphrase).
-
-When they have all their credentials, tell them to type 'ready'.
 
 **[PAUSE]**
 
@@ -553,8 +475,5 @@ rules.json. This is your strategy running, not a generic bot."
 
 Tell them: "This is exactly what will run on your schedule in the cloud.
 Every decision is logged to safety-check-log.json — that's your full audit trail.
-
-Open BitGet → Order History. As real trades execute over time, you'll see them
-appear there automatically.
 
 You're done. Your bot is live."
