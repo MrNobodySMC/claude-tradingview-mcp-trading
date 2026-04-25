@@ -4,8 +4,7 @@
 
 - Connect Claude to your TradingView chart and execute trades automatically
 - Run a safety check — every condition in your strategy must pass before a trade goes through
-- Deploy to the cloud and run 24/7 on a schedule, even when your laptop is closed
-- Log every trade automatically to `trades.csv` — date, price, fees, net amount, ready for your accountant
+- Log every trade automatically to `trades.csv` or my Trading jounal (link in X BIO) — date, price, fees, net amount, ready for your accountant.
 
 ---
 
