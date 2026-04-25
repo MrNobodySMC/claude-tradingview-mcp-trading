@@ -210,182 +210,7 @@ If it fails, help them troubleshoot before continuing.
 
 ---
 
-## STEP 4 — Choose your strategy
-
-Ask the user:
-
-"Now for your strategy. You've got two options:
-
-1. **I already have my own strategy** — tell me what it is and I'll build your rules.json around it.
-2. **Scrape a strategy from a YouTube trader** — pick any trader whose videos you watch. I'll pull their transcripts and extract their strategy automatically using Apify.
-
-Type 1 or 2."
-
-**[PAUSE — wait for their answer]**
-
----
-
-**If they choose 1 (their own strategy):**
-
-Ask: "Describe your strategy — the indicators you use, the conditions for a buy, the
-conditions for a sell, and any risk rules (stop loss %, max risk per trade, etc.)."
-
-**[PAUSE — get their answer]**
-
-Take what they describe and rewrite `rules.json` to reflect it. Confirm with them
-what you've written before saving.
-
-Tell them: "Done — rules.json now reflects your strategy. That's what the safety
-check will use."
-
----
-
-**If they choose 2 (scrape from YouTube):**
-
-Tell them: "We're going to use Apify to pull transcripts from a YouTube trader's
-channel and extract their strategy automatically. You'll need a free Apify account."
-
-Open Apify in their browser:
-- **Mac:** `open https://apify.com`
-- **Windows:** `start https://apify.com`
-- **Linux:** `xdg-open https://apify.com`
-
-Tell them: "I've opened Apify. Create your account if you don't have one, then come
-back and type 'done'."
-
-**[PAUSE — wait for 'done']**
-
-Now walk them through getting their API token:
-
-"Now let's get your API token. Here's exactly how:
-
-1. In Apify, look for the **search / console** on the left-hand side
-2. Click the search icon and type **API**
-3. Click **API tokens**
-4. On the right side, click **Create a new token**
-5. Give it a name — something like 'trading bot'
-6. Click **Create**
-7. Click the **copy button** next to your new token
-
-Type 'ready' when you have it copied."
-
-**[PAUSE]**
-
-Open .env and add the Apify key:
-- **Mac:** `open -e .env`
-- **Windows:** `notepad .env`
-- **Linux:** `nano .env`
-
-Tell them: "Add this line to your .env file:
-```
-APIFY_API_KEY=[paste your token here]
-```
-Save it and type 'done'."
-
-**[PAUSE]**
-
-Now ask: "Which YouTube trader do you want to build your strategy from?
-Go to their YouTube channel and paste the channel URL here.
-(Example: Blockchain Backer — just paste the URL of their channel page)"
-
-**[PAUSE — get their answer]**
-
-Tell them: "On it. I'm going to scrape the transcripts of their last 100 videos
-and extract a trading strategy from them. This takes about 10–20 minutes. I'll
-let you know when it's done."
-
-Use the Apify YouTube Transcript Scraper to pull transcripts from that channel URL.
-Use their APIFY_API_KEY from .env.
-API endpoint: `https://api.apify.com/v2/acts/streamers~youtube-transcript/runs`
-
-Once transcripts are returned, extract the trading strategy using the prompt in
-`prompts/01-extract-strategy.md`. Save the output to `rules.json`.
-
-Tell the user: "Done. I've extracted [trader name]'s strategy from their transcripts
-and saved it to rules.json. That's now what your safety check will use — their
-conditions, not a generic template."
-
----
-
-## STEP 5 — Deploy to Railway (run the bot 24/7 in the cloud)
-
-Tell the user: "Now let's get this running in the cloud so it works even when your
-laptop is closed. We'll use Railway for this."
-
-Check if Railway CLI is installed:
-```bash
-railway --version
-```
-
-If not installed, install it:
-```bash
-npm install -g @railway/cli
-```
-
-Check if they're logged into Railway:
-```bash
-railway whoami
-```
-
-If not logged in:
-```bash
-railway login
-```
-
-Tell them: "I've opened the Railway login page. Log in with GitHub or email,
-then come back and type 'done'."
-
-**[PAUSE if login is needed]**
-
-Once logged in, ask the user before touching anything:
-
-"How often do you want the bot to check for trades?
-
-1. Every 4 hours *(recommended for 4H charts)*
-2. Once a day at 9am UTC
-3. Every hour
-4. Custom — describe what you want
-
-Type 1, 2, 3, or tell me what you want."
-
-**[PAUSE — get their answer]**
-
-Map their choice to a cron expression:
-- 1 → `0 */4 * * *`
-- 2 → `0 9 * * *`
-- 3 → `0 * * * *`
-- Custom → interpret what they said and write the correct cron expression
-
-Now write that schedule into `railway.json` automatically — no need for the user to touch Railway:
-
-```bash
-# Read their chosen cron, then update railway.json with it
-```
-
-Update the `deploy` section of `railway.json` to include:
-```json
-"cronSchedule": "[their chosen cron expression]"
-```
-
-Then deploy:
-```bash
-railway init
-railway up
-```
-
-Tell them: "Done — I've set your schedule to [plain English description of their choice] and deployed. You don't need to touch Railway at all.
-
-Your bot is now live. It's set to PAPER TRADING mode by default — which means it checks everything and logs every decision, but no real money moves until you turn it on. Watch it for a few days. When you're happy, run:
-
-```bash
-railway variables set PAPER_TRADING=false
-```
-
-And it goes live."
-
----
-
-## STEP 6 — Tax accounting setup
+## STEP 4 — Tax accounting setup
 
 Tell the user: "Every trade your bot places is automatically recorded in a spreadsheet
 called `trades.csv`. It was created the moment you ran the bot for the first time —
@@ -426,7 +251,7 @@ This prints your total trades, total volume, and estimated fees paid to date."
 
 ---
 
-## STEP 7 — Explain the safety check conditions
+## STEP 5 — Explain the safety check conditions
 
 Before running the bot, read their `rules.json` and tell them exactly what their
 safety check will be checking — in plain English.
@@ -449,7 +274,7 @@ is specific to their strategy — not a generic filter.
 
 ---
 
-## STEP 8 — Watch it run
+## STEP 6 — Watch it run
 
 Run the bot once right now so they can see it working:
 
