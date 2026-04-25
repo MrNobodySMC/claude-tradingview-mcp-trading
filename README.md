@@ -60,5 +60,4 @@ Two rules that apply to every exchange — **withdrawals OFF, IP whitelist ON**.
 
 ## Resources
 
-- [TradingView MCP server repo](https://github.com/MrNobodySMC/tradingview-mcp)
-- [Apify](https://apify.com) — search actor store for "YouTube Transcript Scraper"
+how to get tradovate api access: https://youtu.be/P6cJF6Q2Y24?si=kmwJCInoiZ3Q2JXI
