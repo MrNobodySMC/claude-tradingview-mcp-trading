@@ -1,4 +1,4 @@
-# Claude Code + TradingView = Trading and Journaling
+# Claude Code + TradingView = Automated systems and Journaling
 
 ## What you'll be able to do
 
