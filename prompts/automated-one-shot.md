@@ -17,36 +17,6 @@ Start immediately with Step 1. Do not ask any questions before starting.
 
 ---
 
-## STEP 0 — Wispr Flow (optional but recommended)
-
-Tell the user:
-
-"Before we start — one quick thing. Wispr Flow turns your voice into text anywhere on your
-computer, so you can speak your instructions to Claude instead of typing.
-
-You don't need it. You can type everything. But if you want it, I'll open it for you now.
-
-Do you want to set up Wispr Flow? Type 'yes' to open it, or 'skip' to continue without it."
-
-**[PAUSE — wait for their answer]**
-
-**If they say 'yes':**
-
-Open Wispr Flow in their browser:
-- **Mac:** `open https://wisprflow.ai`
-- **Windows:** `start https://wisprflow.ai`
-- **Linux:** `xdg-open https://wisprflow.ai`
-
-Tell them: "I've opened Wispr Flow. Download it, install it, and come back when it's
-running. Once it's set up you can speak the rest of this setup instead of typing.
-Type 'done' when you're ready."
-
-**[PAUSE]**
-
-**If they say 'skip':** Move straight to Step 1.
-
----
-
 ## STEP 1 — Clone the repository
 
 Run the following commands:
