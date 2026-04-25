@@ -66,11 +66,11 @@ exchange automatically. Let's go."
 
 ---
 
-## STEP 2 — Choose your exchange and get your API key
+## STEP 2 — Choose your exchange and get your API key or skip and setup later
 
 Ask the user:
 
-"Which exchange are you going to use? Type the name of your exchange."
+"Which exchange are you going to use? Type the name of your exchange or setup later."
 
 **[PAUSE — wait for their answer]**
 
