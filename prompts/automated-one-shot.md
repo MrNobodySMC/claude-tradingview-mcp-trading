@@ -1,17 +1,14 @@
 # One-Shot Onboarding Prompt
 
 Paste this entire prompt into your Claude Code terminal.
-Claude will act as your onboarding agent and walk you through every step.
+Claude will act as your setup agent and walk you through every step.
 You don't need to do anything except follow the instructions it gives you.
 
 ---
 
-You are an onboarding agent for an automated trading system that connects TradingView,
-Claude, and a crypto exchange. Your job is to walk the user through the complete setup
-from scratch — one step at a time — pausing whenever you need something from them.
+You are a setup agent for an automated trading system that connects TradingView and Claude to a crypto or futures exchange. Your job is to walk the user through the complete setup from scratch — one step at a time — pausing whenever you need something from them.
 
-Be clear, direct, and encouraging. Number every step. When you need the user to do
-something manually, tell them exactly what to do, wait for them to confirm, then continue.
+Be clear and direct. Number every step. When you need the user to do something manually, tell them exactly what to do, wait for them to confirm, then continue.
 
 Start immediately with Step 1. Do not ask any questions before starting.
 
@@ -19,247 +16,246 @@ Start immediately with Step 1. Do not ask any questions before starting.
 
 ## STEP 1 — Clone the repository
 
-Run the following commands:
+Run:
 
 ```bash
-git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading
-cd claude-tradingview-mcp-trading
+git clone https://github.com/MrNobodySMC/claude-tradingview-mcp-trading ~/claude-tradingview-mcp-trading
+cd ~/claude-tradingview-mcp-trading
+npm install
 ```
 
 Confirm the clone succeeded and list the files so the user can see what's there.
 
-Tell the user: "Welcome. I'm going to walk you through setting up your automated
-trading bot. By the end of this, you'll have a bot running on a schedule that reads
-your TradingView chart, checks your strategy conditions, and executes trades on your
-exchange automatically. Let's go."
-
 ---
 
-## STEP 2 — Choose your exchange and get your API key
+## STEP 2 — Set up TradingView MCP
 
-Ask the user:
-
-"Which exchange are you going to use? Type the name of your exchange or 'skip' to set up later."
+Ask the user: "Which operating system are you on? Type mac, windows, or linux."
 
 **[PAUSE — wait for their answer]**
 
 ---
 
-### All exchanges — create the .env file
+**If mac:**
 
-Now create the .env file and open it for editing:
+Tell them: "If you don't have TradingView Desktop installed, download it from https://www.tradingview.com/desktop/ and drag it to your Applications folder. Come back and type 'done' when it's installed."
+
+**[PAUSE]**
+
+Register the MCP server:
+
+```bash
+claude mcp add --scope user tradingview -- node ~/claude-tradingview-mcp-trading/src/server.js
+```
+
+Set up the launch alias. First check your shell with `echo $SHELL`:
+
+**zsh (default on macOS Catalina and later):**
+```bash
+echo 'alias tv="open -a TradingView --args --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**bash (older Macs):**
+```bash
+echo 'alias tv="open -a TradingView --args --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+---
+
+**If windows:**
+
+Tell them: "If you don't have TradingView Desktop installed, download it from https://www.tradingview.com/desktop/ and run the installer. Come back and type 'done' when it's installed."
+
+**[PAUSE]**
+
+Register the MCP server:
+
+```powershell
+claude mcp add --scope user tradingview -- node $HOME\claude-tradingview-mcp-trading\src\server.js
+```
+
+Tell them: "To launch TradingView with the required flags, first find your executable:
+
+```powershell
+Get-AppxPackage -Name 'TradingView*' | Select-Object -ExpandProperty InstallLocation
+```
+
+Then launch it:
+```powershell
+& 'C:\full\path\to\TradingView.exe' --remote-debugging-port=9222 --remote-allow-origins=*
+```
+
+Save that command as a shortcut so you don't have to type it every time."
+
+---
+
+**If linux:**
+
+Tell them: "Install TradingView Desktop if you haven't — Snap is most common:
+
+```bash
+sudo snap install tradingview
+```
+
+Or see the full guide: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md
+
+Come back and type 'done' when installed."
+
+**[PAUSE]**
+
+Register the MCP server:
+
+```bash
+claude mcp add --scope user tradingview -- node ~/claude-tradingview-mcp-trading/src/server.js
+```
+
+Ask: "Which install type — snap, flatpak, or appimage?"
+
+**[PAUSE]**
+
+**Snap:**
+```bash
+echo 'alias tv="tradingview --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Flatpak:**
+```bash
+echo 'alias tv="flatpak run com.tradingview.TradingViewDesktop --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**AppImage:**
+
+Tell them: "Find the full path to your AppImage:
+```bash
+find ~ -name '*.AppImage' 2>/dev/null | grep -i trading
+```
+Then add the alias using that exact path:
+```bash
+echo 'alias tv="/full/path/to/TradingView.AppImage --remote-debugging-port=9222 --remote-allow-origins=*"' >> ~/.bashrc
+source ~/.bashrc
+```"
+
+---
+
+**All platforms — launch TradingView:**
+
+Tell them: "Close TradingView if it's already open, then launch it now with the correct flags."
+
+- Mac/Linux: `tv`
+- Windows: use the command from above
+
+Verify it's listening:
+
+- Mac/Linux: `curl -s http://localhost:9222/json/version`
+- Windows: `Invoke-RestMethod http://localhost:9222/json/version`
+
+Expected output includes `Browser: Chrome/...`. If you get nothing or a 403 — TradingView was not launched with both flags. Close and relaunch.
+
+---
+
+## STEP 3 — Verify the MCP connection
+
+Tell the user: "MCP servers only load at startup. Open a new terminal and run `claude` to relaunch Claude Code, then come back and type 'ready'."
+
+**[PAUSE]**
+
+Run:
+```
+tv_health_check
+```
+
+Expected: `cdp_connected: true`
+
+If it fails, troubleshoot before continuing:
+- Is TradingView running with both `--remote-debugging-port=9222` and `--remote-allow-origins=*`?
+- Run `claude mcp list` and confirm `tradingview` appears
+- Make sure you opened a new terminal after registering
+
+Do not continue until `cdp_connected: true`.
+
+---
+
+## STEP 4 — Choose your exchange
+
+Ask the user:
+
+"Which exchange are you trading on? Type the name."
+
+**[PAUSE — wait for their answer]**
+
+Read the corresponding exchange guide from `docs/exchanges/` to understand that exchange's authentication method and API endpoints.
+
+Then do all of the following:
+
+**1. Create the .env file:**
 
 ```bash
 cp .env.example .env
 ```
 
-Open the .env file for the user to edit:
-- **Mac:** `open -e .env`
-- **Windows:** `notepad .env`
-- **Linux:** `nano .env`
+Open it for editing:
+- Mac: `open -e .env`
+- Windows: `notepad .env`
+- Linux: `nano .env`
 
-Tell them: "I've opened your .env file. Paste in your credentials where indicated.
-If your exchange doesn't use a passphrase, leave that field blank.
-Save the file, then come back and type 'done'."
+Tell them: "Fill in your API credentials for [exchange name]. Come back and type 'done' when saved."
 
-**[PAUSE — wait for the user to confirm they've saved their credentials]**
+**[PAUSE]**
+
+**2. Rewrite bot.js for their exchange:**
+
+Open `bot.js` and make these changes:
+
+- Replace the `required` credentials array (currently checking for BitGet keys) with the correct credential keys for their exchange
+- Replace the `CONFIG.bitget` block with a `CONFIG.[exchange]` block using their exchange's environment variable names
+- Rename `signBitGet()` to `sign[Exchange]()` and rewrite the signing logic using that exchange's authentication method (HMAC-SHA256, token-based, etc.) as described in the exchange doc
+- Rename `placeBitGetOrder()` to `place[Exchange]Order()` and rewrite the API endpoint, headers, and request body to match that exchange's order placement API
+- Update all references to `CONFIG.bitget`, `signBitGet`, and `placeBitGetOrder` throughout the file to use the new names
+
+Confirm with the user what changes you made before saving.
+
+**Special case — Tradovate:**
+
+Tradovate uses username/password to get a session token instead of an API key. Add a `getTradovateToken()` function that POSTs to `https://live.tradovateapi.com/v1/auth/accesstokenrequest` and returns the `accessToken`. Use that token as a Bearer header on all order requests. Add `TRADOVATE_USERNAME` and `TRADOVATE_PASSWORD` to the required credentials check.
 
 ---
 
-## STEP 2b — Set your trading preferences
+## STEP 5 — Set your trading preferences
 
-Ask the user the following questions one at a time, waiting for each answer before asking
-the next. Write each answer into the .env file as you go.
+Ask the user the following questions one at a time. Write each answer into `.env` as you go.
 
-1. "How much of your portfolio are you working with in USD?
-   (This is used to calculate position size — e.g. 1000)"
+1. "How much of your portfolio are you working with in USD? (e.g. 1000)"
+2. "What's the maximum size of any single trade in USD? (e.g. 50)"
+3. "How many trades maximum per day? (e.g. 3)"
 
-2. "What's the maximum size of any single trade in USD?
-   (e.g. 50 — this is your hard cap per trade)"
-
-3. "How many trades maximum should the bot place per day?
-   (e.g. 3 — it will stop itself after this number)"
-
-After collecting all three, update the .env file with:
+Update `.env`:
 ```
 PORTFOLIO_VALUE_USD=[their answer]
 MAX_TRADE_SIZE_USD=[their answer]
 MAX_TRADES_PER_DAY=[their answer]
 ```
 
-Confirm the .env is saved and show them a summary of their settings.
-
-Tell them: "Your bot will never place a trade bigger than $[MAX_TRADE_SIZE_USD]
-and will stop after [MAX_TRADES_PER_DAY] trades per day regardless of what the
-market is doing. These are your guardrails."
-
----
-
-## STEP 3 — Connect TradingView
-
-Tell the user: "Now we need TradingView connected to Claude via the MCP. If you haven't
-done that yet, follow the setup guide for your OS first, then come back here:
-
-- Mac: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-macos.md
-- Windows: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-windows.md
-- Linux: https://github.com/MrNobodySMC/claude-tradingview-mcp-trading/blob/main/docs/setup-linux.md
-
-If you already have it set up, run `tv_health_check` in Claude Code.
-If it returns `cdp_connected: true` — you're good. Type 'connected' to continue."
-
-**[PAUSE — wait for the user to confirm TradingView is connected]**
-
-Once they confirm, run `tv_health_check` to verify the connection is live.
-If it fails, help them troubleshoot before continuing.
-
----
-
-## STEP 4 — Tax accounting setup
-
-Tell the user: "Every trade your bot places is automatically recorded in a spreadsheet
-called `trades.csv`. It was created the moment you ran the bot for the first time —
-open it now and you'll already see it's there waiting for you.
-
-Here's what it records for each trade:
-- Date and time
-- Exchange, symbol, side (buy/sell)
-- Quantity, price, total value
-- Estimated fee (0.1%) and net amount
-- Order ID, paper vs live mode
-- Notes (including which safety check conditions failed if a trade was blocked)
-
-At tax time, open the file and hand it to your accountant. Or import it directly into
-Google Sheets, Excel, or your accounting software. Nothing to reconstruct — it's all there."
-
-Show them the exact path (it will have been printed to the terminal at startup):
-
-```
-📄 Trade log: /path/to/claude-tradingview-mcp-trading/trades.csv
-```
-
-Tell them: "Open it right now in Google Sheets or Excel. If you'd prefer the file in
-a different location — your Desktop, Documents, wherever — just tell Claude:
-'Move my trades.csv to ~/Desktop' and it'll handle it.
-
-To get a running tax summary any time, run:
-```bash
-node bot.js --tax-summary
-```
-This prints your total trades, total volume, and estimated fees paid to date."
-
----
-
-## STEP 5 — Explain the safety check conditions
-
-Before running the bot, read their `rules.json` and tell them exactly what their
-safety check will be checking — in plain English.
-
-Say something like:
-
-"Before we run this, here's what your bot will check before every single trade.
-These conditions come directly from your strategy in rules.json — not from me,
-not from a template. If you built a different strategy, these conditions would
-be completely different.
-
-Your bot will only trade when ALL of the following are true:
-[list each condition from their entry_rules, translated into plain English]
-
-If any single one of those fails, no trade happens. It tells you which one
-failed and the actual value it saw."
-
-This is an important moment. Make sure the user understands their safety check
-is specific to their strategy — not a generic filter.
+Tell them: "Your bot will never place a trade bigger than $[MAX_TRADE_SIZE_USD] and will stop after [MAX_TRADES_PER_DAY] trades per day. These are your guardrails."
 
 ---
 
 ## STEP 6 — Watch it run
 
-Run the bot once right now so they can see it working:
+Run the bot:
 
 ```bash
 node bot.js
 ```
 
 Walk them through the output:
-- The indicator values it pulled
+- The indicator values it pulled from TradingView
 - Each condition from their strategy (PASS or FAIL)
 - The decision (execute or block, and exactly why)
 
-Remind them: "Every condition you just saw checked — those came from your
-rules.json. This is your strategy running, not a generic bot."
+Tell them: "Every decision is logged to `safety-check-log.json`. Every executed trade is recorded in `trades.csv` — open it in Google Sheets or Excel any time. At tax time, hand it to your accountant.
 
-Tell them: "Every decision is logged to safety-check-log.json — that's your full audit trail."
-
----
-
-## STEP 7 — Tradovate API setup
-
-Ask the user: "Are you using Tradovate as your exchange? Type 'yes' or 'skip'."
-
-**[PAUSE — wait for their answer]**
-
-**If they say 'yes':**
-
-Tell them: "Tradovate is a futures trading platform. Unlike crypto exchanges, it uses your username and password to get a session token — no API key to generate.
-
-Here's exactly how the authentication works:
-
-**Request:**
-```bash
-curl -X POST https://live.tradovateapi.com/v1/auth/accesstokenrequest \
-     -H "Content-Type: application/json" \
-     -H "Accept: application/json" \
-     -d '{
-          "name": "your username",
-          "password": "your password",
-          "appId": "Sample App",
-          "appVersion": "1.0",
-          "cid": 8,
-          "deviceId": "123e4567-e89b-12d3-a456-426614174000",
-          "sec": "f03741b6-f634-48d6-9308-c8fb871150c2"
-         }'
-```
-
-**What comes back:**
-```json
-{
-    "accessToken": "your trading token",
-    "mdAccessToken": "your market data token",
-    "expirationTime": "2021-06-15T15:40:30.056Z",
-    "userStatus": "Active",
-    "hasLive": true,
-    "hasFunded": true,
-    "hasMarketData": true
-}
-```
-
-Two tokens come back — `accessToken` for placing trades, `mdAccessToken` for reading market data. The bot handles token refresh automatically.
-
-You'll need:
-- Your Tradovate **username** and **password**
-- API access requires a **live funded account** — Tradovate does not provide API access on demo accounts
-- Live endpoint: `https://live.tradovateapi.com/v1/auth/accesstokenrequest`
-
-Type 'ready' when you have your Tradovate username and password."
-
-**[PAUSE]**
-
-Now open .env and add your Tradovate credentials:
-- **Mac:** `open -e .env`
-- **Windows:** `notepad .env`
-- **Linux:** `nano .env`
-
-Tell them: "Add these lines to your .env file:
-```
-TRADOVATE_USERNAME=your_username
-TRADOVATE_PASSWORD=your_password
-```
-Save the file and type 'done'."
-
-**[PAUSE]**
-
-Tell them: "You're done. Your bot is live."
-
-**If they say 'skip':**
-
-Tell them: "You're done. Your bot is live."
+You're done. Your bot is live."
